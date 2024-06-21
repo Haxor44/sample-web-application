@@ -1,9 +1,6 @@
 pipeline{
 
-      agent any {
-
-            image 'maven:3-openjdk-11'    
-            }
+      agent any
         
         stages{
 

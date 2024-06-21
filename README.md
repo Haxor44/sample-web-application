@@ -5,7 +5,7 @@
 
 ```
 mvn clean package
-and build the instructions... 
+and build the instructions....
 ```
 
 # Deploy instruction

@@ -15,7 +15,7 @@ pipeline{
                     timeout(time:1, unit:"HOURS"){
                         def qg = waitForQualityGate()
                         if (qg.status != 'OK'){
-                            error "Pipeline aborted: $(qg.status)"
+                            error "Pipeline aborted: ${qg.status}"
                         }
                     }
                     sh "mvn clean install"

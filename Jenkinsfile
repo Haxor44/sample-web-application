@@ -25,7 +25,19 @@ pipeline{
 		  
                  	}
                	 }  
-              }	
+              }
+
+			  stage('Docker build'){
+				steps{
+					script{
+						sh 'docker build . -t haxor44/java-web:latest'
+						withCredentials([string(credentialsId: 'docker_password', variable: 'docker_password')]) {
+							sh 'docker login -u evolmalek04@gmail.com -p $docker_password'
+							sh 'docker push haxor44/java-web:latest'
+						}
+					}
+				}
+			  }	
 		
             }	       	     	         
 }

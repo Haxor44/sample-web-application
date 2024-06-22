@@ -1,11 +1,6 @@
 pipeline{
 
-      agent {
-                docker {
-                image 'maven:3-openjdk-11'
-
-                }
-            }
+      
         
         stages{
 
@@ -13,7 +8,10 @@ pipeline{
                   steps{
                       script{
 			      withSonarQubeEnv('sonarserver') { 
-			      sh "mvn sonar:sonar"
+					withMaven{
+						sh "mvn sonar:sonar"
+					}
+			      
                        	     	}
 			      timeout(time: 1, unit: 'HOURS') {
 			      def qg = waitForQualityGate()
@@ -21,7 +19,10 @@ pipeline{
 					   error "Pipeline aborted due to quality gate failure: ${qg.status}"
 				      }
                     		}
-		    	    sh "mvn clean install"
+					withMaven{
+						sh "mvn clean install"
+					}
+		    	    
 		  
                  	}
                	 }  
